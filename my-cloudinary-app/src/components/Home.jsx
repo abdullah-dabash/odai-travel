@@ -187,7 +187,7 @@ const JordanToursWebsite = () => {
       halfPrice: "Half price",
       under5Free: "Under 5 years free for foreigners and Arabs",
       // Additional labels
-      min: "min",
+      min: "Min",
       am: "AM",
       pm: "PM",
       to: "to",
