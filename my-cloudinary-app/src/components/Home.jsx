@@ -6,6 +6,7 @@ const JordanToursWebsite = () => {
   const [scrollY, setScrollY] = useState(0);
   const [language, setLanguage] = useState('en');
   const [youTubeReady, setYouTubeReady] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const videoRefs = useRef({});
   const players = useRef({});
 
@@ -193,8 +194,6 @@ const JordanToursWebsite = () => {
       and: "and",
       // Navigation and contact
       backToTop: "Back to Top",
-      whatsapp: "WhatsApp",
-      call: "Call",
       destinations: {
         petra: { name: "Petra" },
         wadirum: { name: "Wadi Rum" },
@@ -283,8 +282,6 @@ const JordanToursWebsite = () => {
       and: "و",
       // Navigation and contact
       backToTop: "العودة للأعلى",
-      whatsapp: "واتساب",
-      call: "اتصال",
       destinations: {
         petra: { name: "البترا" },
         wadirum: { name: "وادي رم" },
@@ -609,13 +606,13 @@ const JordanToursWebsite = () => {
       {/* Traditional Jordanian Header Pattern */}
       <div className="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-amber-600 via-red-600 via-amber-600 via-red-600 to-amber-600"></div>
       
-      {/* Language Switcher */}
-      <div className={`fixed top-6 z-50 ${isRTL ? 'left-6' : 'right-6'}`}>
+      {/* Language Switcher - Made smaller on mobile */}
+      <div className={`fixed top-6 z-50 ${isRTL ? 'left-3 md:left-6' : 'right-3 md:right-6'}`}>
         <button
           onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-          className="bg-gradient-to-r from-amber-600 to-red-600 text-white px-6 py-3 rounded-full font-bold hover:from-amber-500 hover:to-red-500 transition-all duration-300 shadow-2xl border-2 border-amber-300/50 backdrop-blur-lg flex items-center space-x-2"
+          className="bg-gradient-to-r from-amber-600 to-red-600 text-white px-3 py-2 md:px-6 md:py-3 rounded-full font-bold hover:from-amber-500 hover:to-red-500 transition-all duration-300 shadow-2xl border-2 border-amber-300/50 backdrop-blur-lg flex items-center space-x-1 md:space-x-2 text-sm md:text-base"
         >
-          <Globe className="w-5 h-5" />
+          <Globe className="w-4 h-4 md:w-5 md:h-5" />
           <span>{t.languageSwitch}</span>
         </button>
       </div>
@@ -638,19 +635,19 @@ const JordanToursWebsite = () => {
         <div className={`relative z-10 text-center px-4 max-w-6xl mx-auto ${isRTL ? 'text-right' : 'text-left'}`}>
           {/* Traditional Arabic/Jordanian welcome */}
           <div className="mb-8">
-            <p className="text-2xl text-amber-300 font-serif mb-2">{t.welcomeGuest}</p>
+            <p className="text-xl md:text-2xl text-amber-300 font-serif mb-2">{t.welcomeGuest}</p>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-500 to-red-500 mx-auto"></div>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-red-300 to-amber-300 mb-6 font-serif leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-red-300 to-amber-300 mb-6 font-serif leading-tight">
             {t.title}
           </h1>
-          <p className="text-xl md:text-2xl text-amber-200 mb-12 leading-relaxed max-w-4xl mx-auto font-medium">
+          <p className="text-lg md:text-xl lg:text-2xl text-amber-200 mb-12 leading-relaxed max-w-4xl mx-auto font-medium">
             {t.subtitle}
           </p>
           
-          {/* Traditional Jordanian-style navigation */}
-          <div className={`flex justify-center ${isRTL ? 'space-x-reverse' : ''} space-x-6 flex-wrap gap-4`}>
+          {/* Traditional Jordanian-style navigation - Made smaller on mobile */}
+          <div className={`flex justify-center ${isRTL ? 'space-x-reverse' : ''} space-x-2 md:space-x-6 flex-wrap gap-2 md:gap-4`}>
             {Object.keys(destinations).map((key) => {
               const dest = destinations[key];
               const Icon = dest.icon;
@@ -658,14 +655,14 @@ const JordanToursWebsite = () => {
                 <button
                   key={key}
                   onClick={() => scrollToSection(key)}
-                  className={`px-8 py-4 rounded-2xl font-bold transition-all duration-500 transform hover:scale-110 flex items-center space-x-3 border-2 backdrop-blur-lg ${
+                  className={`px-4 py-2 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold transition-all duration-500 transform hover:scale-110 flex items-center space-x-2 md:space-x-3 border-2 backdrop-blur-lg text-sm md:text-base ${
                     activeSection === key
                       ? `bg-gradient-to-r ${dest.accentColor} text-white shadow-2xl border-amber-300 scale-110`
                       : 'bg-amber-900/30 text-amber-200 hover:bg-amber-800/40 border-amber-500/50'
                   } ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
                 >
-                  <Icon className="w-6 h-6" />
-                  <span className="font-serif text-lg">{dest.name}</span>
+                  <Icon className="w-4 h-4 md:w-6 md:h-6" />
+                  <span className="font-serif text-sm md:text-lg">{dest.name}</span>
                 </button>
               );
             })}
@@ -689,8 +686,8 @@ const JordanToursWebsite = () => {
             {/* Section Header with Traditional Elements */}
             <div className={`text-center mb-16 ${isRTL ? 'text-right' : 'text-left'}`}>
               <div className="flex items-center justify-center mb-8">
-                <div className={`p-6 rounded-full bg-gradient-to-r ${destination.accentColor} shadow-2xl border-4 border-amber-300/50 relative`}>
-                  <destination.icon className="w-16 h-16 text-white" />
+                <div className={`p-4 md:p-6 rounded-full bg-gradient-to-r ${destination.accentColor} shadow-2xl border-4 border-amber-300/50 relative`}>
+                  <destination.icon className="w-12 h-12 md:w-16 md:h-16 text-white" />
                   {/* Traditional decorative corners */}
                   <div className="absolute -top-2 -left-2 w-6 h-6 border-l-4 border-t-4 border-amber-300"></div>
                   <div className="absolute -top-2 -right-2 w-6 h-6 border-r-4 border-t-4 border-amber-300"></div>
@@ -699,7 +696,7 @@ const JordanToursWebsite = () => {
                 </div>
               </div>
               
-              <h2 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-red-300 mb-6 font-serif">
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-red-300 mb-6 font-serif">
                 {destination.name}
               </h2>
               
@@ -711,8 +708,8 @@ const JordanToursWebsite = () => {
               </div>
               
               <div className={`flex items-center justify-center mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <MapPin className={`w-6 h-6 text-amber-400 ${isRTL ? 'ml-3' : 'mr-3'}`} />
-                <span className="text-xl text-amber-300 font-serif">{t.jordanKingdom}</span>
+                <MapPin className={`w-5 h-5 md:w-6 md:h-6 text-amber-400 ${isRTL ? 'ml-3' : 'mr-3'}`} />
+                <span className="text-lg md:text-xl text-amber-300 font-serif">{t.jordanKingdom}</span>
               </div>
             </div>
 
@@ -720,7 +717,7 @@ const JordanToursWebsite = () => {
             <div className="mb-16">
               <div className="relative max-w-4xl mx-auto">
                 <div 
-                  className="bg-gradient-to-br from-amber-900/40 to-red-900/40 backdrop-blur-xl rounded-3xl p-8 border-4 border-amber-400/40 relative overflow-hidden"
+                  className="bg-gradient-to-br from-amber-900/40 to-red-900/40 backdrop-blur-xl rounded-3xl p-4 md:p-8 border-4 border-amber-400/40 relative overflow-hidden"
                   data-video-key={key}
                 >
                   {/* Traditional corner decorations */}
@@ -772,101 +769,102 @@ const JordanToursWebsite = () => {
         </section>
       ))}
 
-      {/* Traditional Jordanian Footer */}
-      <section className="py-20 px-4 bg-gradient-to-r from-amber-900 via-red-900 to-amber-900 relative overflow-hidden">
-        <GeometricPattern type="petra-pattern" className="text-amber-700 opacity-30" />
-        
-        <div className={`max-w-4xl mx-auto text-center relative z-10 ${isRTL ? 'text-right' : 'text-left'}`}>
-          <div className="mb-8">
-            <div className="w-32 h-1 bg-gradient-to-r from-amber-500 to-red-500 mx-auto mb-4"></div>
-            <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-red-300 mb-6 font-serif">
-              {t.readyAdventure}
-            </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-red-500 to-amber-500 mx-auto"></div>
-          </div>
-          
-          <p className="text-xl text-amber-200 mb-12 font-medium max-w-2xl mx-auto leading-relaxed">
-            {t.bookExperience}
-          </p>
-          
-          <div className={`flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 ${isRTL ? 'md:space-x-reverse' : ''} md:space-x-8`}>
-            <button 
-              onClick={() => window.open('https://wa.me/962777123456?text=I would like to book a Jordan adventure tour', '_blank')}
-              className="px-12 py-4 bg-gradient-to-r from-amber-600 to-red-600 text-white font-bold rounded-full hover:from-amber-500 hover:to-red-500 hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-amber-300/50 font-serif text-lg"
-            >
-              {t.bookNow}
-            </button>
-            <button 
-              onClick={() => window.open('mailto:info@jordanadventures.com?subject=Jordan Tours Inquiry', '_blank')}
-              className="px-12 py-4 bg-amber-900/40 backdrop-blur-lg border-2 border-amber-400/50 text-amber-200 font-bold rounded-full hover:bg-amber-800/50 hover:border-amber-300 hover:text-amber-100 transition-all duration-300 font-serif text-lg"
-            >
-              {t.contactUs}
-            </button>
-          </div>
-        </div>
-      </section>
+
 
       {/* Traditional bottom border */}
       <div className="h-4 bg-gradient-to-r from-amber-600 via-red-600 via-amber-600 via-red-600 to-amber-600"></div>
 
-      {/* Floating Navigation */}
+      {/* Hamburger Menu Button */}
       {scrollY > 100 && (
-        <div className={`fixed bottom-8 z-50 ${isRTL ? 'left-8' : 'right-8'}`}>
-          <div className="flex flex-col space-y-3">
-            {/* Back to Top Button */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className={`fixed bottom-4 z-50 p-3 bg-gradient-to-r from-amber-600 to-red-600 text-white rounded-full shadow-2xl hover:from-amber-500 hover:to-red-500 transition-all duration-300 border-2 border-amber-300/50 backdrop-blur-lg ${isRTL ? 'left-4' : 'right-4'}`}
+          title="Menu"
+        >
+          <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1">
+            <div className={`w-4 h-0.5 bg-white transition-all duration-300 ${sidebarOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
+            <div className={`w-4 h-0.5 bg-white transition-all duration-300 ${sidebarOpen ? 'opacity-0' : ''}`}></div>
+            <div className={`w-4 h-0.5 bg-white transition-all duration-300 ${sidebarOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
+          </div>
+        </button>
+      )}
+
+      {/* Sidebar Navigation */}
+      <div className={`fixed top-0 ${isRTL ? 'left-0' : 'right-0'} h-full w-80 bg-gradient-to-b from-amber-900/95 to-red-900/95 backdrop-blur-xl border-l-4 ${isRTL ? 'border-r-4 border-l-0' : ''} border-amber-400/30 z-40 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : isRTL ? '-translate-x-full' : 'translate-x-full'}`}>
+        <div className="p-6 h-full flex flex-col">
+          {/* Sidebar Header */}
+          <div className={`flex items-center justify-between mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <h3 className="text-2xl font-bold text-amber-200 font-serif">Menu</h3>
             <button
-              onClick={scrollToTop}
-              className="p-4 bg-gradient-to-r from-amber-600 to-red-600 text-white rounded-full shadow-2xl hover:from-amber-500 hover:to-red-500 transition-all duration-300 border-2 border-amber-300/50 backdrop-blur-lg"
-              title={t.backToTop}
+              onClick={() => setSidebarOpen(false)}
+              className="p-2 text-amber-200 hover:text-white transition-colors duration-200"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            
-            {/* Quick Navigation Menu */}
-            <div className="bg-gradient-to-br from-amber-900/90 to-red-900/90 backdrop-blur-xl rounded-2xl p-3 border-2 border-amber-400/30">
+          </div>
+
+          {/* Navigation Options */}
+          <div className="flex-1">
+            {/* Back to Top */}
+            <button
+              onClick={() => {
+                scrollToTop();
+                setSidebarOpen(false);
+              }}
+              className={`w-full p-4 mb-4 bg-gradient-to-r from-amber-700/50 to-red-700/50 text-amber-200 rounded-xl hover:from-amber-600/60 hover:to-red-600/60 transition-all duration-300 flex items-center ${isRTL ? 'flex-row-reverse' : ''} space-x-3 ${isRTL ? 'space-x-reverse' : ''}`}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
+              <span className="font-medium">{t.backToTop}</span>
+            </button>
+
+            {/* Destination Navigation */}
+            <div className="space-y-3">
+              <h4 className="text-lg font-semibold text-amber-300 mb-4 font-serif">Destinations</h4>
               {Object.keys(destinations).map((key) => {
                 const dest = destinations[key];
                 const Icon = dest.icon;
                 return (
                   <button
                     key={key}
-                    onClick={() => scrollToSection(key)}
-                    className={`w-full p-3 mb-2 last:mb-0 rounded-xl transition-all duration-300 flex items-center space-x-2 ${
+                    onClick={() => {
+                      scrollToSection(key);
+                      setSidebarOpen(false);
+                    }}
+                    className={`w-full p-4 rounded-xl transition-all duration-300 flex items-center space-x-3 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} ${
                       activeSection === key
-                        ? `bg-gradient-to-r ${dest.accentColor} text-white`
-                        : 'text-amber-200 hover:bg-amber-800/40'
-                    } ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}
-                    title={dest.name}
+                        ? `bg-gradient-to-r ${dest.accentColor} text-white shadow-lg`
+                        : 'bg-amber-900/30 text-amber-200 hover:bg-amber-800/50 hover:text-amber-100'
+                    }`}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="text-sm font-medium">{dest.name}</span>
+                    <Icon className="w-6 h-6" />
+                    <span className="font-medium text-lg">{dest.name}</span>
                   </button>
                 );
               })}
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Fixed Contact Bar for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-gradient-to-r from-amber-900 via-red-900 to-amber-900 backdrop-blur-xl border-t-2 border-amber-400/30 p-4">
-        <div className={`flex ${isRTL ? 'flex-row-reverse' : ''} space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-          <button 
-            onClick={() => window.open('https://wa.me/962777123456?text=Jordan Tours Inquiry', '_blank')}
-            className="flex-1 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-bold rounded-xl hover:from-green-500 hover:to-green-600 transition-all duration-300 text-center"
-          >
-            {t.whatsapp}
-          </button>
-          <button 
-            onClick={() => window.open('tel:+962777123456', '_blank')}
-            className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 text-center"
-          >
-            {t.call}
-          </button>
+          {/* Traditional decorative footer */}
+          <div className="pt-6 border-t-2 border-amber-400/30">
+            <div className="text-center">
+              <div className="w-16 h-1 bg-gradient-to-r from-amber-500 to-red-500 mx-auto mb-2"></div>
+              <p className="text-amber-300 text-sm font-serif">{t.jordanKingdom}</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Sidebar Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
 
       <style jsx>{`
         @keyframes slideInUp {
@@ -925,6 +923,58 @@ const JordanToursWebsite = () => {
         
         ::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(to bottom, #fbbf24, #ef4444);
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+          .space-x-2 > * + * {
+            margin-left: 0.5rem;
+          }
+          
+          [dir="rtl"] .space-x-reverse > * + * {
+            margin-right: 0.5rem;
+            margin-left: 0;
+          }
+        }
+        
+        /* Sidebar specific styles */
+        @media (max-width: 640px) {
+          .w-80 {
+            width: 90vw;
+            max-width: 320px;
+          }
+        }
+        
+        /* Hamburger animation */
+        .hamburger-line {
+          transform-origin: center;
+        }
+        
+        /* Smooth sidebar transitions */
+        .sidebar-enter {
+          transform: translateX(100%);
+        }
+        
+        .sidebar-enter-active {
+          transform: translateX(0);
+          transition: transform 300ms ease-in-out;
+        }
+        
+        .sidebar-exit {
+          transform: translateX(0);
+        }
+        
+        .sidebar-exit-active {
+          transform: translateX(100%);
+          transition: transform 300ms ease-in-out;
+        }
+        
+        [dir="rtl"] .sidebar-enter {
+          transform: translateX(-100%);
+        }
+        
+        [dir="rtl"] .sidebar-exit-active {
+          transform: translateX(-100%);
         }
       `}</style>
     </div>
