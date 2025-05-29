@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Star, Clock, Users, DollarSign, Camera, Sun, Mountain, Waves, Globe, Tent, Compass } from 'lucide-react';
 
 const JordanToursWebsite = () => {
@@ -6,12 +6,44 @@ const JordanToursWebsite = () => {
   const [scrollY, setScrollY] = useState(0);
   const [language, setLanguage] = useState('en');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [playingVideo, setPlayingVideo] = useState(null);
+  const videoRefs = useRef({});
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Auto-play video when scrolled into view
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.6,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const videoKey = entry.target.getAttribute('data-video-key');
+        
+        if (entry.isIntersecting) {
+          setPlayingVideo(videoKey);
+        } else if (playingVideo === videoKey) {
+          setPlayingVideo(null);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all video containers
+    setTimeout(() => {
+      const videoContainers = document.querySelectorAll('[data-video-key]');
+      videoContainers.forEach(container => {
+        observer.observe(container);
+      });
+    }, 500);
+
+    return () => observer.disconnect();
+  }, [playingVideo]);
 
   const isRTL = language === 'ar';
 
@@ -24,7 +56,7 @@ const JordanToursWebsite = () => {
       capacity: "Capacity",
       includes: "Includes",
       note: "Note",
-      welcomeGuest: "",
+      welcomeGuest: "Welcome to Paradise",
       jordanKingdom: "The Hashemite Kingdom of Jordan",
       languageSwitch: "العربية",
       backToTop: "Back to Top",
@@ -137,7 +169,7 @@ const JordanToursWebsite = () => {
       capacity: "السعة",
       includes: "يشمل",
       note: "ملاحظة",
-      welcomeGuest: "أهلاً وسهلاً",
+      welcomeGuest: "أهلاً وسهلاً بالجنة",
       jordanKingdom: "المملكة الأردنية الهاشمية",
       languageSwitch: "English",
       backToTop: "العودة للأعلى",
@@ -256,7 +288,7 @@ const JordanToursWebsite = () => {
         {
           id: 'petra-balloon',
           title: t.hotAirBalloon,
-          video: 'https://www.youtube.com/embed/c2JOrcVQtQM',
+          video: 'https://www.youtube.com/watch?v=FzsTBs-49H4',
           duration: `20 ${t.minutes}`,
           altitude: `250-300m ${t.altitude}`,
           prices: {
@@ -270,7 +302,7 @@ const JordanToursWebsite = () => {
         {
           id: 'petra-lunch',
           title: t.lunchInPetra,
-          video: 'https://www.youtube.com/embed/FzsTBs-49H4',
+          video: 'https://www.youtube.com/watch?v=c2JOrcVQtQM',
           prices: {
             [t.adult]: '13 JD',
             [`${t.child} (5-12 ${t.years})`]: '8 JD'
@@ -287,7 +319,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-balloons',
           title: t.balloonsOverRum,
-          video: 'https://www.youtube.com/embed/svn6Q1ElFj0',
+          video: 'https://www.youtube.com/watch?v=FzsTBs-49H4',
           time: `${t.daily} ${t.sunrise}`,
           duration: `45 ${t.min} ${t.flight}`,
           departure: `${t.departure} 4:15 ${t.am} ${t.fromCamps}`,
@@ -300,7 +332,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-safari',
           title: t.sunsetSafariTour,
-          video: 'https://www.youtube.com/embed/KtdGGbTErCY',
+          video: 'https://www.youtube.com/watch?v=dGiQaabX3_o',
           duration: `2 ${t.hours}`,
           capacity: `6 ${t.people} ${t.perCar}`,
           prices: {
@@ -312,7 +344,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-camel',
           title: t.sunriseCamelTour,
-          video: 'https://www.youtube.com/embed/dGiQaabX3_o',
+          video: 'https://www.youtube.com/watch?v=P5JdhfWef5M',
           duration: `1 ${t.hour}`,
           prices: {
             [t.perPerson]: `15-20 JD (${t.dependingOnCamp})`
@@ -321,7 +353,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-4wd',
           title: t.fourWDCars,
-          video: 'https://www.youtube.com/embed/MvApErqnLW4',
+          video: 'https://www.youtube.com/watch?v=QvWBU7wZSqk',
           prices: {
             [t.perPerson]: '35 JD'
           },
@@ -330,7 +362,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-zipline',
           title: t.wadiRumZipLine,
-          video: 'https://www.youtube.com/embed/P5JdhfWef5M',
+          video: 'https://www.youtube.com/watch?v=ZY2ON8DFR7E',
           prices: {
             [t.jordanian]: '10 JD',
             [t.nonJordanian]: '15 JD'
@@ -340,7 +372,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-stargazing',
           title: t.starGazing,
-          video: 'https://www.youtube.com/embed/QvWBU7wZSqk',
+          video: 'https://www.youtube.com/watch?v=c2JOrcVQtQM',
           time: `${t.departure} 9:15 ${t.pm} ${t.fromCamps}`,
           duration: `1.5 ${t.hours}`,
           equipment: `4 ${t.telescopes}`,
@@ -353,7 +385,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-sandboard',
           title: t.sandBoard,
-          video: 'https://www.youtube.com/embed/ZY2ON8DFR7E',
+          video: 'https://www.youtube.com/watch?v=nGLqbrj4KoE',
           prices: {
             [t.perPerson]: '35 JD'
           }
@@ -369,7 +401,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-parasailing',
           title: t.parasailing,
-          video: 'https://www.youtube.com/embed/OqVROy0EXCI',
+          video: 'https://www.youtube.com/watch?v=wV_CwA5V-bM',
           weightLimit: `${t.weightLimit}: 100-160 ${t.kg}`,
           prices: {
             [t.single]: '45 JD',
@@ -380,7 +412,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-jetski',
           title: t.jetSki,
-          video: 'https://www.youtube.com/embed/nGLqbrj4KoE',
+          video: 'https://www.youtube.com/watch?v=Y5bVAJxNbhI',
           ageLimit: `${t.ageLimit}: ${t.above} 18 ${t.years}`,
           weightLimit: `${t.weightLimit}: ${t.upTo} 120 ${t.kg}`,
           prices: {
@@ -393,7 +425,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-knobtube',
           title: t.knobTube,
-          video: 'https://www.youtube.com/embed/wV_CwA5V-bM',
+          video: 'https://www.youtube.com/watch?v=JA4lAmF2C9I',
           capacity: '2-4 ' + t.people,
           duration: '8-10 ' + t.minutes,
           prices: {
@@ -403,7 +435,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-bananatube',
           title: t.bananaTube,
-          video: 'https://www.youtube.com/embed/Y5bVAJxNbhI',
+          video: 'https://www.youtube.com/watch?v=8fEIgLqwEWs',
           capacity: '3-10 ' + t.people,
           duration: '8-10 ' + t.minutes,
           prices: {
@@ -413,7 +445,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-diving',
           title: t.diving,
-          video: 'https://www.youtube.com/embed/JA4lAmF2C9I',
+          video: 'https://www.youtube.com/watch?v=dqJ4DfzWY7I',
           location: `${t.location}: ${t.coralChain}`,
           ageLimit: `${t.ageLimit}: ${t.above} 11 ${t.years}`,
           requirements: `${t.requirements}: ${t.noRespiratoryHeart}`,
@@ -425,7 +457,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-seatours-day',
           title: t.seaToursDay,
-          video: 'https://www.youtube.com/embed/8fEIgLqwEWs',
+          video: 'https://www.youtube.com/watch?v=L7idS7W6OQE',
           duration: `1.5 ${t.hours}`,
           prices: {
             [`${t.adult} ${t.withLunch}`]: '16 JD',
@@ -438,7 +470,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-seatours-evening',
           title: t.seaToursEvening,
-          video: 'https://www.youtube.com/embed/dqJ4DfzWY7I',
+          video: 'https://www.youtube.com/watch?v=tXSX8kkKEHw',
           duration: `2 ${t.hours}`,
           location: 'Eilat',
           prices: {
@@ -454,7 +486,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-sunset',
           title: t.sunsetTour,
-          video: 'https://www.youtube.com/embed/L7idS7W6OQE',
+          video: 'https://www.youtube.com/watch?v=VTLQaZHhEgM',
           duration: `2 ${t.hours}`,
           location: 'Eilat',
           prices: {
@@ -464,7 +496,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-speedboat',
           title: t.speedBoat,
-          video: 'https://www.youtube.com/embed/tXSX8kkKEHw',
+          video: 'https://www.youtube.com/watch?v=HM7pyHQ0xjE',
           capacity: `${t.upTo} 6 ${t.people}`,
           prices: {
             [`15 ${t.min}`]: '35 JD',
@@ -474,7 +506,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-submarine',
           title: t.submarine,
-          video: 'https://www.youtube.com/embed/VTLQaZHhEgM',
+          video: 'https://www.youtube.com/watch?v=R9OZPWDen0M',
           duration: `3 ${t.hours}`,
           prices: {
             [`${t.adult} ${t.withFood}`]: '25 JD',
@@ -487,7 +519,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-snorkeling',
           title: t.snorkeling,
-          video: 'https://www.youtube.com/embed/HM7pyHQ0xjE',
+          video: 'https://www.youtube.com/watch?v=Coo7miBhCPQ',
           prices: {
             ['Free Snorkeling']: '20 JD',
             ['With Guide']: '25 JD'
@@ -496,7 +528,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-chalets',
           title: t.publicSecurityChalets,
-          video: 'https://www.youtube.com/embed/R9OZPWDen0M',
+          video: 'https://www.youtube.com/watch?v=kOTdbBIXQq4',
           prices: {
             [t.adult]: '10 JD',
             [`${t.child} 5-10 ${t.years}`]: '5 JD'
@@ -506,7 +538,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-waterpark',
           title: t.waterPark,
-          video: 'https://www.youtube.com/embed/Coo7miBhCPQ',
+          video: 'https://www.youtube.com/watch?v=tYzMYcUty6E',
           hours: `${t.operatingHours}: 9:00 ${t.am} - 7:00 ${t.pm}`,
           attractions: `26 ${t.games}, Wind Surf (5 JD)`,
           prices: {
@@ -520,7 +552,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-carjetski',
           title: t.carJetSki,
-          video: 'https://www.youtube.com/embed/kOTdbBIXQq4',
+          video: 'https://www.youtube.com/watch?v=OqVROy0EXCI',
           duration: `1 ${t.hour}`,
           prices: {
             [t.perPerson]: '120 JD'
@@ -529,7 +561,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-helmetdiving',
           title: t.helmetDiving,
-          video: 'https://www.youtube.com/embed/tYzMYcUty6E',
+          video: 'https://www.youtube.com/watch?v=svn6Q1ElFj0',
           depth: '4m',
           prices: {
             [t.perPerson]: '35 JD'
@@ -552,149 +584,208 @@ const JordanToursWebsite = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const ActivityCard = ({ activity, destination }) => (
-    <div className={`bg-white rounded-2xl shadow-lg border-4 border-yellow-400 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl overflow-hidden ${isRTL ? 'text-right' : 'text-left'}`}>
-      {/* Video Section */}
-      <div className="p-4 pb-0">
-        <div className="relative rounded-xl overflow-hidden shadow-md border-2 border-yellow-300">
-          <div className="aspect-video">
-            <iframe
-              src={`${activity.video}?autoplay=0&mute=1&loop=1&controls=1&modestbranding=1&rel=0&playlist=${activity.video.split('/embed/')[1]}`}
-              title={activity.title}
-              className="w-full h-full"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              loading="lazy"
-            />
+  const ActivityCard = ({ activity, destination }) => {
+    const isPlaying = playingVideo === activity.id;
+    const [userClicked, setUserClicked] = useState(false);
+    
+    const handleVideoClick = () => {
+      setUserClicked(true);
+      setPlayingVideo(activity.id);
+    };
+
+    const videoId = activity.video.includes('/embed/') 
+      ? activity.video.split('/embed/')[1].split('?')[0] 
+      : activity.video.includes('watch?v=')
+      ? activity.video.split('watch?v=')[1].split('&')[0]
+      : activity.video.includes('youtu.be/')
+      ? activity.video.split('youtu.be/')[1].split('?')[0]
+      : null;
+
+    return (
+      <div className={`bg-white rounded-2xl shadow-lg border-4 border-yellow-400 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl overflow-hidden ${isRTL ? 'text-right' : 'text-left'}`}>
+        {/* Video Section */}
+        <div className="p-4 pb-0">
+          <div 
+            className="relative rounded-xl overflow-hidden shadow-md border-2 border-yellow-300 cursor-pointer group"
+            data-video-key={activity.id}
+            onClick={handleVideoClick}
+          >
+            <div className="aspect-video">
+              {(isPlaying && userClicked && videoId) ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&loop=1&playlist=${videoId}`}
+                  title={activity.title}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="relative w-full h-full bg-gray-900">
+                  {videoId ? (
+                    <img
+                      src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                      alt={activity.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <Camera className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                        <p className="text-lg font-medium opacity-75">{activity.title}</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/20 transition-all duration-300">
+                    <div className="bg-red-600 rounded-full p-4 transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Video status indicator */}
+            <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm rounded-full p-2">
+              {isPlaying ? (
+                <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+              ) : (
+                <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Content Section */}
-      <div className="p-6">
-        <div className={`flex items-start justify-between mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <div className={isRTL ? 'text-right' : 'text-left'}>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{activity.title}</h3>
+        {/* Content Section */}
+        <div className="p-6">
+          <div className={`flex items-start justify-between mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <div className={isRTL ? 'text-right' : 'text-left'}>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{activity.title}</h3>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Star className="w-6 h-6 text-yellow-500 fill-current" />
+              <destination.icon className="w-5 h-5 text-orange-500" />
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Star className="w-6 h-6 text-yellow-500 fill-current" />
-            <destination.icon className="w-5 h-5 text-orange-500" />
-          </div>
-        </div>
 
-        <div className={`space-y-3 mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
-          {activity.duration && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Clock className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.duration}</span>
-            </div>
-          )}
-          {activity.capacity && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Users className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.capacity}</span>
-            </div>
-          )}
-          {activity.includes && (
-            <div className={`flex items-start text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Camera className={`w-4 h-4 mt-1 ${isRTL ? 'ml-2' : 'mr-2'} flex-shrink-0 text-yellow-600`} />
-              <span className="text-sm font-medium leading-relaxed">{activity.includes}</span>
-            </div>
-          )}
-          {activity.time && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Clock className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.time}</span>
-            </div>
-          )}
-          {activity.departure && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <MapPin className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.departure}</span>
-            </div>
-          )}
-          {activity.equipment && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Camera className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.equipment}</span>
-            </div>
-          )}
-          {activity.weightLimit && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Users className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.weightLimit}</span>
-            </div>
-          )}
-          {activity.ageLimit && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Users className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.ageLimit}</span>
-            </div>
-          )}
-          {activity.location && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <MapPin className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.location}</span>
-            </div>
-          )}
-          {activity.requirements && (
-            <div className={`flex items-start text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Star className={`w-4 h-4 mt-1 ${isRTL ? 'ml-2' : 'mr-2'} flex-shrink-0 text-yellow-600`} />
-              <span className="text-sm font-medium leading-relaxed">{activity.requirements}</span>
-            </div>
-          )}
-          {activity.hours && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Clock className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.hours}</span>
-            </div>
-          )}
-          {activity.attractions && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Star className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.attractions}</span>
-            </div>
-          )}
-          {activity.altitude && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Mountain className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">{activity.altitude}</span>
-            </div>
-          )}
-          {activity.depth && (
-            <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Waves className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
-              <span className="text-sm font-medium">Depth: {activity.depth}</span>
-            </div>
-          )}
-        </div>
-
-        <div className="border-t-2 border-yellow-300 pt-4">
-          <div className={`flex items-center mb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <DollarSign className={`w-5 h-5 text-yellow-600 ${isRTL ? 'ml-2' : 'mr-2'}`} />
-            <span className="text-gray-900 font-bold text-lg">{t.prices}:</span>
-          </div>
-          <div className="grid grid-cols-1 gap-3 text-sm">
-            {Object.entries(activity.prices || {}).map(([key, value]) => (
-              <div key={key} className={`flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <span className="text-gray-700 font-medium">
-                  {key}:
-                </span>
-                <span className="font-bold text-orange-600 text-lg">{value}</span>
+          <div className={`space-y-3 mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {activity.duration && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Clock className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.duration}</span>
               </div>
-            ))}
+            )}
+            {activity.capacity && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Users className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.capacity}</span>
+              </div>
+            )}
+            {activity.includes && (
+              <div className={`flex items-start text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Camera className={`w-4 h-4 mt-1 ${isRTL ? 'ml-2' : 'mr-2'} flex-shrink-0 text-yellow-600`} />
+                <span className="text-sm font-medium leading-relaxed">{activity.includes}</span>
+              </div>
+            )}
+            {activity.time && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Clock className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.time}</span>
+              </div>
+            )}
+            {activity.departure && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <MapPin className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.departure}</span>
+              </div>
+            )}
+            {activity.equipment && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Camera className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.equipment}</span>
+              </div>
+            )}
+            {activity.weightLimit && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Users className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.weightLimit}</span>
+              </div>
+            )}
+            {activity.ageLimit && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Users className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.ageLimit}</span>
+              </div>
+            )}
+            {activity.location && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <MapPin className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.location}</span>
+              </div>
+            )}
+            {activity.requirements && (
+              <div className={`flex items-start text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Star className={`w-4 h-4 mt-1 ${isRTL ? 'ml-2' : 'mr-2'} flex-shrink-0 text-yellow-600`} />
+                <span className="text-sm font-medium leading-relaxed">{activity.requirements}</span>
+              </div>
+            )}
+            {activity.hours && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Clock className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.hours}</span>
+              </div>
+            )}
+            {activity.attractions && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Star className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.attractions}</span>
+              </div>
+            )}
+            {activity.altitude && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Mountain className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">{activity.altitude}</span>
+              </div>
+            )}
+            {activity.depth && (
+              <div className={`flex items-center text-gray-700 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <Waves className={`w-4 h-4 ${isRTL ? 'ml-2' : 'mr-2'} text-yellow-600`} />
+                <span className="text-sm font-medium">Depth: {activity.depth}</span>
+              </div>
+            )}
           </div>
-        </div>
 
-        {activity.note && (
-          <div className="mt-4 p-4 bg-orange-50 rounded-xl border border-orange-200">
-            <p className="text-orange-800 text-sm font-medium leading-relaxed">{activity.note}</p>
+          <div className="border-t-2 border-yellow-300 pt-4">
+            <div className={`flex items-center mb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <DollarSign className={`w-5 h-5 text-yellow-600 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+              <span className="text-gray-900 font-bold text-lg">{t.prices}:</span>
+            </div>
+            <div className="grid grid-cols-1 gap-3 text-sm">
+              {Object.entries(activity.prices || {}).map(([key, value]) => (
+                <div key={key} className={`flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <span className="text-gray-700 font-medium">
+                    {key}:
+                  </span>
+                  <span className="font-bold text-orange-600 text-lg">{value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        )}
+
+          {activity.note && (
+            <div className="mt-4 p-4 bg-orange-50 rounded-xl border border-orange-200">
+              <p className="text-orange-800 text-sm font-medium leading-relaxed">{activity.note}</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className={`min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
@@ -957,6 +1048,19 @@ const JordanToursWebsite = () => {
           .w-80 {
             width: 90vw;
             max-width: 320px;
+          }
+        }
+        
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: .5;
           }
         }
       `}</style>
