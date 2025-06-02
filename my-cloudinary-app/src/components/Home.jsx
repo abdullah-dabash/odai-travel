@@ -119,7 +119,7 @@ const JordanToursWebsite = () => {
       balloonsOverRum: "Balloons over Rum",
       sunsetSafariTour: "Sunset Safari Tour",
       sunriseCamelTour: "Sunrise Camel Tour",
-      fourWDCars: "4WD Cars",
+      fourWDCars: "ATV",
       wadiRumZipLine: "Wadi Rum ZipLine",
       starGazing: "Star Gazing",
       sandBoard: "Sand Board",
@@ -127,12 +127,12 @@ const JordanToursWebsite = () => {
       // Aqaba Activities
       parasailing: "Parasailing",
       jetSki: "Jet Ski",
-      knobTube: "Knob Tube",
+      knobTube: "Sofa Tube",
       bananaTube: "Banana Tube",
       diving: "Diving",
-      seaToursDay: "Day Sea Tours",
-      seaToursEvening: "Evening Sea Tours",
-      sunsetTour: "Sunset Tour from Eilat",
+      seaToursDay: "Day Boat Cruise",
+      seaToursEvening: "Evening Boat Cruise",
+      sunsetTour: "Sunset Boat Cruise",
       speedBoat: "Speed Boat",
       submarine: "Submarine",
       snorkeling: "Snorkeling",
@@ -169,7 +169,7 @@ const JordanToursWebsite = () => {
       capacity: "السعة",
       includes: "يشمل",
       note: "ملاحظة",
-      welcomeGuest: "أهلاً وسهلاً بالجنة",
+      welcomeGuest: "أهلاً وسهلاً ",
       jordanKingdom: "المملكة الأردنية الهاشمية",
       languageSwitch: "English",
       backToTop: "العودة للأعلى",
@@ -240,12 +240,12 @@ const JordanToursWebsite = () => {
       // Aqaba Activities
       parasailing: "البراشوت",
       jetSki: "جيت سكي",
-      knobTube: "كنب تيوب",
+      knobTube: "سوفا تيوب",
       bananaTube: "بنانا تيوب",
       diving: "الغطس",
-      seaToursDay: "الجولات البحرية النهارية",
-      seaToursEvening: "الجولات البحرية المسائية",
-      sunsetTour: "جولة غروب الشمس من إيلات",
+      seaToursDay: "جولات اليخت النهارية",
+      seaToursEvening: "جولات اليخت المسائية",
+      sunsetTour: "جولات اليخت الغروب",
       speedBoat: "سبيد بوت",
       submarine: "الغواصة",
       snorkeling: "سنوركلينغ",
@@ -288,7 +288,7 @@ const JordanToursWebsite = () => {
         {
           id: 'petra-balloon',
           title: t.hotAirBalloon,
-          video: 'https://www.youtube.com/watch?v=FzsTBs-49H4',
+          video: 'https://youtu.be/8LjYA_mhlPY?si=7vjHHax58l8WCfKo',
           duration: `20 ${t.minutes}`,
           altitude: `250-300m ${t.altitude}`,
           prices: {
@@ -302,7 +302,7 @@ const JordanToursWebsite = () => {
         {
           id: 'petra-lunch',
           title: t.lunchInPetra,
-          video: 'https://www.youtube.com/watch?v=c2JOrcVQtQM',
+          video: 'https://youtu.be/wJ9t1bDKNto?si=Jmz7jPNUtRsur9MV',
           prices: {
             [t.adult]: '13 JD',
             [`${t.child} (5-12 ${t.years})`]: '8 JD'
@@ -319,7 +319,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-balloons',
           title: t.balloonsOverRum,
-          video: 'https://www.youtube.com/watch?v=FzsTBs-49H4',
+          video: 'https://youtube.com/shorts/fHvpZOMgoEs?si=PiAUuDZsAnV3YZa6',
           time: `${t.daily} ${t.sunrise}`,
           duration: `45 ${t.min} ${t.flight}`,
           departure: `${t.departure} 4:15 ${t.am} ${t.fromCamps}`,
@@ -332,7 +332,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-safari',
           title: t.sunsetSafariTour,
-          video: 'https://www.youtube.com/watch?v=dGiQaabX3_o',
+          video: 'https://youtu.be/S-PdeY4fXcE?si=ovh1MpahR0R1vSN9',
           duration: `2 ${t.hours}`,
           capacity: `6 ${t.people} ${t.perCar}`,
           prices: {
@@ -344,7 +344,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-camel',
           title: t.sunriseCamelTour,
-          video: 'https://www.youtube.com/watch?v=P5JdhfWef5M',
+          video: 'https://youtu.be/ZdLrE7Az2uY?si=vBwyPymnGzu7O_vR',
           duration: `1 ${t.hour}`,
           prices: {
             [t.perPerson]: `15-20 JD (${t.dependingOnCamp})`
@@ -353,7 +353,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-4wd',
           title: t.fourWDCars,
-          video: 'https://www.youtube.com/watch?v=QvWBU7wZSqk',
+          video: 'https://youtube.com/shorts/L-2j2LBzic4?si=CLo61-hw2bdJyl1P',
           prices: {
             [t.perPerson]: '35 JD'
           },
@@ -362,7 +362,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-zipline',
           title: t.wadiRumZipLine,
-          video: 'https://www.youtube.com/watch?v=ZY2ON8DFR7E',
+          video: 'https://youtu.be/x-gftJsnuwk?si=D8XaXkkjpCr8Q3-X',
           prices: {
             [t.jordanian]: '10 JD',
             [t.nonJordanian]: '15 JD'
@@ -372,7 +372,7 @@ const JordanToursWebsite = () => {
         {
           id: 'wadirum-stargazing',
           title: t.starGazing,
-          video: 'https://www.youtube.com/watch?v=c2JOrcVQtQM',
+          video: 'https://youtu.be/N0UKYharhYE?si=8lY1l0wZEu6FfLVE',
           time: `${t.departure} 9:15 ${t.pm} ${t.fromCamps}`,
           duration: `1.5 ${t.hours}`,
           equipment: `4 ${t.telescopes}`,
@@ -401,7 +401,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-parasailing',
           title: t.parasailing,
-          video: 'https://www.youtube.com/watch?v=wV_CwA5V-bM',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           weightLimit: `${t.weightLimit}: 100-160 ${t.kg}`,
           prices: {
             [t.single]: '45 JD',
@@ -412,7 +412,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-jetski',
           title: t.jetSki,
-          video: 'https://www.youtube.com/watch?v=Y5bVAJxNbhI',
+          video: 'https://youtube.com/shorts/teogJCFbqTo?si=SxJat1r2G294COM0',
           ageLimit: `${t.ageLimit}: ${t.above} 18 ${t.years}`,
           weightLimit: `${t.weightLimit}: ${t.upTo} 120 ${t.kg}`,
           prices: {
@@ -425,7 +425,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-knobtube',
           title: t.knobTube,
-          video: 'https://www.youtube.com/watch?v=JA4lAmF2C9I',
+          video: 'https://youtube.com/shorts/L-2j2LBzic4?si=CLo61-hw2bdJyl1P',
           capacity: '2-4 ' + t.people,
           duration: '8-10 ' + t.minutes,
           prices: {
@@ -435,7 +435,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-bananatube',
           title: t.bananaTube,
-          video: 'https://www.youtube.com/watch?v=8fEIgLqwEWs',
+          video: 'https://youtube.com/shorts/L-2j2LBzic4?si=CLo61-hw2bdJyl1P',
           capacity: '3-10 ' + t.people,
           duration: '8-10 ' + t.minutes,
           prices: {
@@ -445,7 +445,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-diving',
           title: t.diving,
-          video: 'https://www.youtube.com/watch?v=dqJ4DfzWY7I',
+          video: 'https://youtube.com/shorts/F_F-kL2C0-Y?si=4LKRLHHamqAjR0YB',
           location: `${t.location}: ${t.coralChain}`,
           ageLimit: `${t.ageLimit}: ${t.above} 11 ${t.years}`,
           requirements: `${t.requirements}: ${t.noRespiratoryHeart}`,
@@ -457,7 +457,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-seatours-day',
           title: t.seaToursDay,
-          video: 'https://www.youtube.com/watch?v=L7idS7W6OQE',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           duration: `1.5 ${t.hours}`,
           prices: {
             [`${t.adult} ${t.withLunch}`]: '16 JD',
@@ -470,9 +470,9 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-seatours-evening',
           title: t.seaToursEvening,
-          video: 'https://www.youtube.com/watch?v=tXSX8kkKEHw',
+          video: 'https://youtube.com/shorts/u7OnCFqDBh0?si=yqja7_fpOgJKx0ms',
           duration: `2 ${t.hours}`,
-          location: 'Eilat',
+          location: 'Ayla Oasis',
           prices: {
             [`${t.adult} Fish Fillet`]: '20 JD',
             [`${t.adult} Fish Denis`]: '25 JD',
@@ -486,9 +486,9 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-sunset',
           title: t.sunsetTour,
-          video: 'https://www.youtube.com/watch?v=VTLQaZHhEgM',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           duration: `2 ${t.hours}`,
-          location: 'Eilat',
+          location: 'Ayla Oasis',
           prices: {
             [`${t.adult} ${t.buffetDinner}`]: '20 JD'
           }
@@ -496,7 +496,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-speedboat',
           title: t.speedBoat,
-          video: 'https://www.youtube.com/watch?v=HM7pyHQ0xjE',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           capacity: `${t.upTo} 6 ${t.people}`,
           prices: {
             [`15 ${t.min}`]: '35 JD',
@@ -506,7 +506,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-submarine',
           title: t.submarine,
-          video: 'https://www.youtube.com/watch?v=R9OZPWDen0M',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           duration: `3 ${t.hours}`,
           prices: {
             [`${t.adult} ${t.withFood}`]: '25 JD',
@@ -519,7 +519,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-snorkeling',
           title: t.snorkeling,
-          video: 'https://www.youtube.com/watch?v=Coo7miBhCPQ',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           prices: {
             ['Free Snorkeling']: '20 JD',
             ['With Guide']: '25 JD'
@@ -528,7 +528,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-chalets',
           title: t.publicSecurityChalets,
-          video: 'https://www.youtube.com/watch?v=kOTdbBIXQq4',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           prices: {
             [t.adult]: '10 JD',
             [`${t.child} 5-10 ${t.years}`]: '5 JD'
@@ -538,7 +538,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-waterpark',
           title: t.waterPark,
-          video: 'https://www.youtube.com/watch?v=tYzMYcUty6E',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           hours: `${t.operatingHours}: 9:00 ${t.am} - 7:00 ${t.pm}`,
           attractions: `26 ${t.games}, Wind Surf (5 JD)`,
           prices: {
@@ -552,7 +552,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-carjetski',
           title: t.carJetSki,
-          video: 'https://www.youtube.com/watch?v=OqVROy0EXCI',
+          video: 'https://youtube.com/shorts/teogJCFbqTo?si=SxJat1r2G294COM0',
           duration: `1 ${t.hour}`,
           prices: {
             [t.perPerson]: '120 JD'
@@ -561,7 +561,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-helmetdiving',
           title: t.helmetDiving,
-          video: 'https://www.youtube.com/watch?v=svn6Q1ElFj0',
+          video: 'https://youtube.com/shorts/pSseL3mSqf4?si=yYoM3h05Fb4LaKJT',
           depth: '4m',
           prices: {
             [t.perPerson]: '35 JD'
@@ -593,13 +593,33 @@ const JordanToursWebsite = () => {
       setPlayingVideo(activity.id);
     };
 
-    const videoId = activity.video.includes('/embed/') 
-      ? activity.video.split('/embed/')[1].split('?')[0] 
-      : activity.video.includes('watch?v=')
-      ? activity.video.split('watch?v=')[1].split('&')[0]
-      : activity.video.includes('youtu.be/')
-      ? activity.video.split('youtu.be/')[1].split('?')[0]
-      : null;
+    // Enhanced video ID extraction that handles YouTube Shorts
+    const extractVideoId = (url) => {
+      if (!url) return null;
+      
+      // Handle different YouTube URL formats
+      const patterns = [
+        // YouTube Shorts: https://youtube.com/shorts/VIDEO_ID or https://www.youtube.com/shorts/VIDEO_ID
+        /(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]+)/,
+        // Regular YouTube: https://youtu.be/VIDEO_ID
+        /(?:youtu\.be\/)([a-zA-Z0-9_-]+)/,
+        // Regular YouTube: https://www.youtube.com/watch?v=VIDEO_ID
+        /(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]+)/,
+        // Embed format: https://www.youtube.com/embed/VIDEO_ID
+        /(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/
+      ];
+      
+      for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match && match[1]) {
+          return match[1];
+        }
+      }
+      
+      return null;
+    };
+
+    const videoId = extractVideoId(activity.video);
 
     return (
       <div className={`bg-white rounded-2xl shadow-lg border-4 border-yellow-400 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl overflow-hidden ${isRTL ? 'text-right' : 'text-left'}`}>
