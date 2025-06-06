@@ -232,7 +232,7 @@ const JordanToursWebsite = () => {
       balloonsOverRum: "بالونات وادي رم",
       sunsetSafariTour: "جولة السفاري لغروب الشمس",
       sunriseCamelTour: "جولة الجمال لشروق الشمس",
-      fourWDCars: "سيارات الدفع الرباعي",
+      fourWDCars: "Round 45- 60 min سيارات الدفع الرباعي",
       wadiRumZipLine: "زيب لاين وادي رم",
       starGazing: "مراقبة النجوم",
       sandBoard: "التزلج على الرمال",
@@ -350,15 +350,7 @@ const JordanToursWebsite = () => {
             [t.perPerson]: `15-20 JD (${t.dependingOnCamp})`
           }
         },
-        {
-          id: 'wadirum-4wd',
-          title: t.fourWDCars,
-          video: 'https://youtube.com/shorts/L-2j2LBzic4?si=CLo61-hw2bdJyl1P',
-          prices: {
-            [t.perPerson]: '35 JD'
-          },
-          note: t.transportNotIncluded
-        },
+  
         {
           id: 'wadirum-zipline',
           title: t.wadiRumZipLine,
@@ -410,6 +402,15 @@ const JordanToursWebsite = () => {
           }
         },
         {
+          id: 'wadirum-4wd',
+          title: t.fourWDCars,
+          video: 'https://youtube.com/shorts/L-2j2LBzic4?si=CLo61-hw2bdJyl1P',
+          prices: {
+            [t.perPerson]: '35 JD'
+          },
+          note: t.transportNotIncluded
+        },
+        {
           id: 'aqaba-jetski',
           title: t.jetSki,
           video: 'https://youtube.com/shorts/hhdLMvYBxW4?si=70ZhNy1kyLVHhbi-',
@@ -425,7 +426,7 @@ const JordanToursWebsite = () => {
         {
           id: 'aqaba-knobtube',
           title: t.knobTube,
-          video: 'https://youtube.com/shorts/L-2j2LBzic4?si=CLo61-hw2bdJyl1P',
+          video: 'https://youtube.com/shorts/wqL9Tl78npM?si=CUCgmslWHHmCgn7N',
           capacity: '2-4 ' + t.people,
           duration: '8-10 ' + t.minutes,
           prices: {
